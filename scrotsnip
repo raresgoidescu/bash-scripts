@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+IMAGE_PATH="/tmp/snip_$(date | sed 's/ /_/g').png"
+
+scrot -s -f -o "$IMAGE_PATH" && xclip -selection clipboard -t image/png -i $IMAGE_PATH
+
+if [ $? -eq 0 ]; then
+    echo $IMAGE_PATH
+    notify-send -i $IMAGE_PATH "Sreenshot" "Saved & copied"
+fi
+

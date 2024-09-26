@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+_TOUCHPAD_ID=$(xinput | grep -E -i -w '(touchpad)' | sed 's/ //g' | awk '{ print $2}' | tr -d "id=")
+
+_TOUCHPAD_EN=$(xinput list-props $_TOUCHPAD_ID | grep "Device Enabled" | awk '{ print $4 }')
+
+if [ $_TOUCHPAD_EN -eq 1 ]; then
+    xinput disable $_TOUCHPAD_ID
+    echo "[+] Touchpad is now disabled"
+    notify-send "The touchpad is now disabled, Master Wayne"
+else
+    xinput enable $_TOUCHPAD_ID
+    echo "[+] Touchpad is now enabled"
+    notify-send "The touchpad is now enabled, Master Wayne"
+fi
+
