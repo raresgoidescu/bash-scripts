@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+tail -n +4 /usr/include/asm/unistd_64.h | head -n -3 | sed 's/#define __NR_//g' | fzf | cut -d ' ' -f 1 | xargs man 2
+
